@@ -33,10 +33,6 @@ for (var i=0;i<names.length;i++){ //loop for constructor function
    new Product(names[i]);
 }
 
-// function random(x){ //function for the random number
-//     var rand = Math.floor((Math.random()* x)+ 1)
-//     return rand
-// }
 
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -142,8 +138,8 @@ function mydrawer(){
         data: {
             labels: names,
             datasets: [{
-                label: '# of Views',
-                label : '# of Voters',
+                label: 'number of Views',
+                label : 'number of Voters',
                 data: chartViews,
                 data:chartVoters,
                 backgroundColor: [
@@ -152,7 +148,21 @@ function mydrawer(){
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(15,82,186,0.2)',
+                    'rgba(160,120,90,0.2)',
+                    'rgba(149,184,194,0.2)',
+                    'rgba(27,1,127,0.2)',
+                    'rgba(96,179,183,0.2)',
+                    'rgba(161,60,58,0.2)',
+                    'rgba(181,3,177,0.2)',
+                    'rgba(109,41,197,0.2)',
+                    'rgba(227,184,83,0.2)',
+                    'rgba(243,82,38,0.2)',
+                    'rgba(213,191,158,0.2)',
+                    'rgba(122,150,91,0.2)',
+                    'rgba(22,125,13,0.2)'
+
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -160,7 +170,20 @@ function mydrawer(){
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(15,82,186,1)',
+                    'rgba(160,120,90,1)',
+                    'rgba(149,184,194,1)',
+                    'rgba(27,1,127,1)',
+                    'rgba(96,179,183,1)',
+                    'rgba(161,60,58,1)',
+                    'rgba(181,3,177,1)',
+                    'rgba(109,41,197,1)',
+                    'rgba(227,184,83,1)',
+                    'rgba(243,82,38,1)',
+                    'rgba(213,191,158,1)',
+                    'rgba(122,150,91,1)',
+                    'rgba(22,125,13,1)'
                 ],
                 borderWidth: 1
             }]
@@ -176,43 +199,5 @@ function mydrawer(){
         }
     });
 }
-// var ctx = document.getElementById('myChart');
-// var myChart = new Chart(ctx, {
-//     type: 'bar',
-//     data: {
-//         labels: Product.all.name,
-//         datasets: [{
-//             label: '# of Votes',
-//             data: Product.all.voters,
-//             data: Product.all.views,
-//             backgroundColor: [
-//                 'rgba(255, 99, 132, 0.2)',
-//                 'rgba(54, 162, 235, 0.2)',
-//                 'rgba(255, 206, 86, 0.2)',
-//                 'rgba(75, 192, 192, 0.2)',
-//                 'rgba(153, 102, 255, 0.2)',
-//                 'rgba(255, 159, 64, 0.2)'
-//             ],
-//             borderColor: [
-//                 'rgba(255, 99, 132, 1)',
-//                 'rgba(54, 162, 235, 1)',
-//                 'rgba(255, 206, 86, 1)',
-//                 'rgba(75, 192, 192, 1)',
-//                 'rgba(153, 102, 255, 1)',
-//                 'rgba(255, 159, 64, 1)'
-//             ],
-//             borderWidth: 1
-//         }]
-//     },
-//     options: {
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     beginAtZero: true
-//                 }
-//             }]
-//         }
-//     }
-// });
-  
+
    
