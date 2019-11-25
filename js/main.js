@@ -37,20 +37,35 @@ function random(x){ //function for the random number
     var rand = Math.floor((Math.random()* x)+ 1)
     return rand
 }
+var checker_last_time = []
+function checker_last_trip(l,o,k){
+    if (checker_last_time.includes(l)){
+        return true
+    }else if(checker_last_time.includes(o)){
+        return true
+    }else if (checker_last_time.includes(k)){
+        return true
+    }    
+    return false
 
+}
 function render(){ // declare the source and title for random 3 images 
-    for (var i=0;i<3;i++){ 
+    
         var img_left = document.getElementById('left');
         var img_right = document.getElementById('right');
         var img_middle = document.getElementById('middle');
         var first = random (names.length-1);
         var seconed = random (names.length-1);
         var third = random (names.length-1);
-        while (first === seconed || first === third || third === seconed){
+        while (first === seconed || first === third || third === seconed || checker_last_trip(first,seconed,third) ){
             first = random (names.length-1);
             seconed = random (names.length-1);
             third = random (names.length-1);
         }
+        checker_last_time = []
+        checker_last_time.push(first)
+        checker_last_time.push(seconed)
+        checker_last_time.push(third)
         var left = Product.all[first]
         left.views ++ // 
         var right = Product.all[seconed]
@@ -63,7 +78,7 @@ function render(){ // declare the source and title for random 3 images
         img_right.setAttribute('alt',right.name);
         img_middle.setAttribute('src',middle.imagePath);
         img_middle.setAttribute('alt',middle.name);
-        }
+        
     }
 render();
 
