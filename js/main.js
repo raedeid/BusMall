@@ -33,10 +33,15 @@ for (var i=0;i<names.length;i++){ //loop for constructor function
    new Product(names[i]);
 }
 
-function random(x){ //function for the random number
-    var rand = Math.floor((Math.random()* x)+ 1)
-    return rand
-}
+// function random(x){ //function for the random number
+//     var rand = Math.floor((Math.random()* x)+ 1)
+//     return rand
+// }
+
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
 var checker_last_time = []
 function checker_last_trip(l,o,k){
     if (checker_last_time.includes(l)){
@@ -54,13 +59,13 @@ function render(){ // declare the source and title for random 3 images
         var img_left = document.getElementById('left');
         var img_right = document.getElementById('right');
         var img_middle = document.getElementById('middle');
-        var first = random (names.length-1);
-        var seconed = random (names.length-1);
-        var third = random (names.length-1);
+        var first = random (0,names.length-1);
+        var seconed = random (0,names.length-1);
+        var third = random (0,names.length-1);
         while (first === seconed || first === third || third === seconed || checker_last_trip(first,seconed,third) ){
-            first = random (names.length-1);
-            seconed = random (names.length-1);
-            third = random (names.length-1);
+            first = random (0,names.length-1);
+            seconed = random (0,names.length-1);
+            third = random (0,names.length-1);
         }
         checker_last_time = []
         checker_last_time.push(first)
@@ -109,10 +114,11 @@ var myFunction = function(event){
         }                
     } check(iterator,25)                        
 }
-
+var chartViews = [];
+var chartVoters = []
 
 space.addEventListener('click',myFunction);
-console.log(Product.all)
+//console.log(Product.all)
 function writer(){
     var body = document.getElementById('body')
     var unorder_list = document.createElement('ul')
@@ -121,10 +127,92 @@ function writer(){
         var li = document.createElement('li')
         unorder_list.appendChild(li)
         var text = Product.all[z]
-        li.textContent = `${text.name} shown ${text.views} and have ${text.voters} `
+        chartViews.push(text.views);
+        chartVoters.push(text.voters);
+        li.textContent = `${text.name} shown ${text.views} and have ${text.voters} views`
     }
+    mydrawer();
 }
-
-
+function mydrawer(){
+    var ctx = document.getElementById('myChart');
+    console.log(chartViews);
+    console.log(chartVoters);
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: names,
+            datasets: [{
+                label: '# of Views',
+                label : '# of Voters',
+                data: chartViews,
+                data:chartVoters,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+// var ctx = document.getElementById('myChart');
+// var myChart = new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//         labels: Product.all.name,
+//         datasets: [{
+//             label: '# of Votes',
+//             data: Product.all.voters,
+//             data: Product.all.views,
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 0.2)',
+//                 'rgba(54, 162, 235, 0.2)',
+//                 'rgba(255, 206, 86, 0.2)',
+//                 'rgba(75, 192, 192, 0.2)',
+//                 'rgba(153, 102, 255, 0.2)',
+//                 'rgba(255, 159, 64, 0.2)'
+//             ],
+//             borderColor: [
+//                 'rgba(255, 99, 132, 1)',
+//                 'rgba(54, 162, 235, 1)',
+//                 'rgba(255, 206, 86, 1)',
+//                 'rgba(75, 192, 192, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }]
+//         }
+//     }
+// });
   
    
