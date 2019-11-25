@@ -23,6 +23,8 @@ var names = ['bag.jpg',
 function Product(name){
     this.name = name ;
     this.imagePath = `img/${name}`;
+    this.voters = 0
+    this.views = 0
     Product.all.push(this);
 }
 Product.all = [];
@@ -50,8 +52,11 @@ function render(){ // declare the source and title for random 3 images
             third = random (names.length-1);
         }
         var left = Product.all[first]
+        left.views ++ // 
         var right = Product.all[seconed]
+        right.views ++
         var middle = Product.all[third]
+        middle.views ++
         img_left.setAttribute('src',left.imagePath);
         img_left.setAttribute('alt',left.name);
         img_right.setAttribute('src',right.imagePath);
@@ -67,6 +72,7 @@ function check(N,limits){ // check if voting cross the limit
     if (N == limits ){
         space.removeEventListener('click',myFunction);
         alert('you ended the voting')
+        writer();
     }
 
 }
@@ -79,24 +85,30 @@ var myFunction = function(event){
     if (event.target.id !== 'bob'){
         render();
         iterator++;
-        if (event.target.id === 'middle'){
-            var mid = event.target.alt
-            list_of_voted.push(mid);
-        }else if (event.target.id === 'right'){
-            list_of_voted.push(event.target.alt);
-        }else if (event.target.id === 'left'){
-            list_of_voted.push(event.target.alt);
-        }
+        for (var w=0;w<Product.all.length;w++){
+            var q = Product.all[w]
+            if (event.target.alt === q.name){
+                q.voters ++ 
+
+         }        
+        }                
     } check(iterator,25)                        
 }
 
 
-console.log(list_of_voted)
 space.addEventListener('click',myFunction);
-for (var v=0;v<list_of_voted.length;v++){
-    document.writeln(list_of_voted[v]);
+console.log(Product.all)
+function writer(){
+    var body = document.getElementById('body')
+    var unorder_list = document.createElement('ul')
+    body.appendChild(unorder_list)
+    for (var z=0 ; z<Product.all.length;z++){
+        var li = document.createElement('li')
+        unorder_list.appendChild(li)
+        var text = Product.all[z]
+        li.textContent = `${text.name} shown ${text.views} and have ${text.voters} `
+    }
 }
-
 
 
   
