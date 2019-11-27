@@ -88,7 +88,7 @@ function check(N,limits){ // check if voting cross the limit
     if (N == limits ){
         space.removeEventListener('click',myFunction);
         alert('you ended the voting')
-        writer();
+        writer(Product.all);
     }
 
 }
@@ -112,27 +112,29 @@ var myFunction = function(event){
 }
 var chartViews = [];
 var chartVoters = []
-
+var test = true
 space.addEventListener('click',myFunction);
 //console.log(Product.all)
-function writer(){
+function writer(list_of_object){
     var body = document.getElementById('body')
     var unorder_list = document.createElement('ul')
     body.appendChild(unorder_list)
-    for (var z=0 ; z<Product.all.length;z++){
-        var li = document.createElement('li')
-        unorder_list.appendChild(li)
-        var text = Product.all[z]
+    for (var z=0 ; z<list_of_object.length;z++){
+        var li = document.createElement('li');
+        unorder_list.appendChild(li);
+        var text = list_of_object[z] ;
         chartViews.push(text.views);
         chartVoters.push(text.voters);
-        li.textContent = `${text.name} shown ${text.views} and have ${text.voters} views`
+        li.textContent = `${text.name} shown ${text.views} and have ${text.voters} votes` ;
     }
     mydrawer();
+    if (test){
+        convert(Product.all);
+    }
+    
 }
 function mydrawer(){
     var ctx = document.getElementById('myChart');
-    console.log(chartViews);
-    console.log(chartVoters);
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -162,7 +164,7 @@ function mydrawer(){
                     'rgba(213,191,158,0.2)',
                     'rgba(122,150,91,0.2)',
                     'rgba(22,125,13,0.2)'
-
+                    
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -200,4 +202,27 @@ function mydrawer(){
     });
 }
 
-   
+
+function convert(update){
+    localStorage.setItem('conclusion',JSON.stringify(update));
+    test = false;
+}
+
+function getValue(){
+    var value = localStorage.getItem('conclusion');
+    var parse = JSON.parse(value);
+    console.log(parse);
+    return parse;
+        
+    
+}
+// getValue();
+var new_parse = getValue();
+console.log(new_parse);
+for (var z=0 ; z<new_parse.length;z++){
+    new_parse[z].views = new_parse[z].views + chartViews[z] ;
+    new_parse[z].voters = new_parse[z].voters + chartVoters[z] ;
+    
+}
+convert(new_parse);
+writer(new_parse);

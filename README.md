@@ -1,1 +1,1 @@
-# BusMall
+# BusMall : is website for random product you can chose one of three to 25 round of voting so we can have an idea what you prefer and what priority of you 

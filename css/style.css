@@ -2,3 +2,10 @@ img {
     width:300px;
     height:300px
 }
+body {
+    background-color: darkred;
+    color: lightseagreen;
+}
+section{
+    text-align: center;
+}
